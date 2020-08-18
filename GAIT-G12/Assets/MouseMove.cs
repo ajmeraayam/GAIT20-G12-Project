@@ -39,6 +39,7 @@ public class MouseMove : MonoBehaviour
         steering = direction - currentVel;
         currentVel = currentVel + steering;
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
+        print("Current Vel " + currentVel);
 
     }
 }

@@ -25,6 +25,7 @@ public class Flee : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Update the enemy's velocity
+        //enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         enemyVel = enemy.GetComponent<Persue>().currentVel;
 
         //update interval used to find targets enemy's future position
@@ -40,10 +41,14 @@ public class Flee : MonoBehaviour {
         direction.Normalize();
         steering = direction - currentVel;
         currentVel = currentVel + steering;
+
+        //Debugging: Move the gameobject up instead of fleeing
+        //currentVel = new Vector2(0.0f, 1.0f);
+        //rigidBody.MovePosition((Vector2)gameObject.transform.position + Vector2.up * Time.deltaTime * speed);
+
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
 
-
-        //rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * Time.deltaTime * speed));
-
+        
+        print("Current Vel " + currentVel);
     }
 }

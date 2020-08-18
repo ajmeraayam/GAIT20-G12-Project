@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +19,13 @@ public class Persue : MonoBehaviour
         target = GameObject.FindWithTag("Player");
         currentVel.x = 0.0f;
         currentVel.y = 0.0f;
-        targetVel = target.GetComponent<Flee>().currentVel;
+        targetVel = target.GetComponent<MouseMove>().currentVel;
     }
 
     // Update is called once per frame
     void Update() {
         //Update the targets velocity
+        //targetVel = target.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         targetVel = target.GetComponent<Flee>().currentVel;
 
         //update interval used to find targets future position
@@ -37,12 +39,16 @@ public class Persue : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
         rigidBody.rotation = angle;
 
-        //Normalize direction vector to get the desired velcoty
+        //Normalize direction vector to get the desired velocity
         direction.Normalize();
         steering = direction - currentVel;
         currentVel = currentVel + steering;
+
+        //Debug.DrawLine(gameObject.transform.position, currentVel * 10, Color.red);
+
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
-        //print("Current Vel " + targetVel);
+       
+        print("Target Vel " + targetVel);
         //print("Position " + gameObject.transform.position);
         print("Interval " + interval);
     }
