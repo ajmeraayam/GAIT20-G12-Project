@@ -6,7 +6,7 @@ using UnityEngine;
 public class LeaderFollowing : MonoBehaviour
 {
     float MaxVelocity = 10f;
-    float MaxForce = 15f;
+    float MaxForce = 10f;
     private Vector3 velocity;
     private bool isInFlock = false;
     GameObject leader;
@@ -68,7 +68,8 @@ public class LeaderFollowing : MonoBehaviour
             force += evade(leader);
         }
 
-        force = force + arrive(behind) + separation(leader);
+        force += separation(leader);
+        force += arrive(behind);
 
         return force;
     }
@@ -135,7 +136,7 @@ public class LeaderFollowing : MonoBehaviour
     {
         Vector3 distance = leader.transform.position - transform.position;
         float updatesAhead = distance.magnitude / MaxVelocity;
-        Vector3 leaderVelocity = leader.GetComponent<Motion>().Horizontalspeed() * Vector3.forward;
+        Vector3 leaderVelocity = leader.GetComponent<Motion>().Horizontalspeed * Vector3.forward;
         Vector3 futurePosition = leader.transform.position + (leaderVelocity * updatesAhead);
         return flee(futurePosition); 
     }
