@@ -16,8 +16,7 @@ public class Flee : MonoBehaviour {
     void Start() {
         rigidBody = this.GetComponent<Rigidbody2D>();
         enemy = GameObject.FindWithTag("Enemy");
-        currentVel.x = 0.0f;
-        currentVel.y = 0.0f;
+        currentVel = new Vector2(0.0f, 0.0f);
         enemyVel = enemy.GetComponent<Persue>().currentVel;
 
     }
@@ -25,8 +24,8 @@ public class Flee : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Update the enemy's velocity
-        //enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
-        enemyVel = enemy.GetComponent<Persue>().currentVel;
+        enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
+        //enemyVel = enemy.GetComponent<Persue>().currentVel;
 
         //update interval used to find targets enemy's future position
         interval = (gameObject.transform.position - enemy.transform.position).magnitude / speed;

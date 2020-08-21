@@ -16,23 +16,27 @@ public class Persue : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         rigidBody = this.GetComponent<Rigidbody2D>();
-        target = GameObject.FindWithTag("Player");
+        target = GameObject.FindWithTag("Human");
+        
         currentVel.x = 0.0f;
         currentVel.y = 0.0f;
-        targetVel = target.GetComponent<MouseMove>().currentVel;
+        targetVel = target.GetComponent<Flee>().currentVel;
     }
 
     // Update is called once per frame
     void Update() {
+        persue(target);
+    }
+
+    private void persue(GameObject target) {
         //Update the targets velocity
         //targetVel = target.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         targetVel = target.GetComponent<Flee>().currentVel;
-
         //update interval used to find targets future position
         interval = (target.transform.position - gameObject.transform.position).magnitude / speed;
 
         //use vector subtraction to find vector between player and current object
-        Vector2 direction = ((Vector2)target.transform.position + targetVel * interval) 
+        Vector2 direction = ((Vector2)target.transform.position + targetVel * interval)
             - (Vector2)gameObject.transform.position;
 
         //find angle needed to rotate toward the target
@@ -44,12 +48,6 @@ public class Persue : MonoBehaviour
         steering = direction - currentVel;
         currentVel = currentVel + steering;
 
-        //Debug.DrawLine(gameObject.transform.position, currentVel * 10, Color.red);
-
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
-       
-        print("Target Vel " + targetVel);
-        //print("Position " + gameObject.transform.position);
-        print("Interval " + interval);
     }
 }
