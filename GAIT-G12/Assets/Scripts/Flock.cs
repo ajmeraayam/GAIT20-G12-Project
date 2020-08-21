@@ -11,10 +11,10 @@ public class Flock : MonoBehaviour
     const float agentDensity = 0.08f;
     [Range(1f, 100f)] public float driveFactor = 10f;
     //MaxSpeed is for flock 
-    //float maxSpeed;
-    [Range(1f, 10f)] public float maxSpeed = 2f;
-    //[Range(1f, 10f)] public float neighbourRadius = 5f;
-    [Range(1f, 10f)] public float neighbourRadius = 1.5f;
+    float maxSpeed;
+    //[Range(1f, 10f)] public float maxSpeed = 2f;
+    [Range(1f, 10f)] public float neighbourRadius = 2f;
+    //[Range(1f, 10f)] public float neighbourRadius = 1.5f;
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
     float squareMaxSpeed;
@@ -24,7 +24,7 @@ public class Flock : MonoBehaviour
     Vector3 followPoint;
     public Vector3 FollowPoint { get { return followPoint; } }
 
-    void Start()
+    /*void Start()
     {
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighbourRadius = neighbourRadius * neighbourRadius;
@@ -71,38 +71,43 @@ public class Flock : MonoBehaviour
             }
         }
         return context;
-    }
+    }*/
 
     /*public GameObject Target()
     {
         return GameObject.FindWithTag("Target");
     }*/
-    /*void Start()
+    void Start()
     {
-        squareMaxSpeed = maxSpeed * maxSpeed;
+        //squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighbourRadius = neighbourRadius * neighbourRadius;
         squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
-        followPoint = new Vector3(transform.localPosition.x, transform.localPosition.y - 2f, transform.localPosition.z);
+        followPoint = new Vector3(transform.localPosition.x, transform.localPosition.y - 1f, transform.localPosition.z);
     }
 
     void Update()
     {
-        maxSpeed = GetComponent<Motion>().Horizontalspeed;
-        followPoint = new Vector3(transform.localPosition.x, transform.localPosition.y - 2f, transform.localPosition.z);
+        maxSpeed = (GetComponent<Motion>().Horizontalspeed == 0f) ? 2f : GetComponent<Motion>().Horizontalspeed;
+        followPoint = new Vector3(transform.localPosition.x, transform.localPosition.y - 0.5f, transform.localPosition.z);
+        squareMaxSpeed = maxSpeed * maxSpeed;
 
-        if(GetComponent<Motion>().Horizontalspeed != 0f)
+        foreach(FlockAgent agent in agents)
         {
-            foreach(FlockAgent agent in agents)
+            List<Transform> context = GetNearbyObjects(agent);
+            Vector3 move;
+            
+            if((agent.transform.position - followPoint).magnitude < 1f && GetComponent<Motion>().Horizontalspeed == 0f)
+                move = Vector3.zero;
+            else
             {
-                List<Transform> context = GetNearbyObjects(agent);
-                Vector3 move = behaviour.calculateMove(agent, context, this);
+                move = behaviour.calculateMove(agent, context, this);
                 move *= driveFactor;
                 if(move.sqrMagnitude > squareMaxSpeed)
                 {
                     move = move.normalized * maxSpeed;
                 }
-                agent.Move(move);
-            }    
+            }
+            agent.Move(move);
         }
     }
     
@@ -119,12 +124,12 @@ public class Flock : MonoBehaviour
         Collider[] contextColliders = Physics.OverlapSphere(agent.transform.position, neighbourRadius);
         foreach(Collider col in contextColliders)
         {
-            if(col != agent.AgentCollider)
+            if(col != agent.AgentCollider && !col.gameObject.CompareTag("Player"))
             {
                 context.Add(col.transform);
             }
         }
 
         return context;
-    }*/
+    }
 }

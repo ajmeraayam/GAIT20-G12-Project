@@ -24,7 +24,7 @@ public class Leader : MonoBehaviour
         {
             if(c.tag == "Human")
             {
-                //flockScript.AddAgent(c.GetComponent<FlockAgent>());
+                flockScript.AddAgent(c.GetComponent<FlockAgent>());
             }
         }
     }

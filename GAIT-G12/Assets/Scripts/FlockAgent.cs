@@ -7,7 +7,7 @@ public class FlockAgent : MonoBehaviour
 {
     Vector3 currentVelocity;
     public Vector3 CurrentVelocity { get { return currentVelocity; } }
-    float maxVelocity = 10f;
+    float maxVelocity = 5f;
     public float MaxVelocity { get { return maxVelocity; } }
     //Use tags
     Collider agentCollider;
@@ -20,7 +20,7 @@ public class FlockAgent : MonoBehaviour
     void Start()
     {
         agentCollider = GetComponent<Collider>();
-        //transform.gameObject.tag = "Human";
+        transform.gameObject.tag = "Human";
     }
 
     public void Initialize(Flock flock)
@@ -29,7 +29,7 @@ public class FlockAgent : MonoBehaviour
     }
     public void Move(Vector3 velocity)
     {
-        //currentVelocity = velocity;
+        currentVelocity = velocity;
         transform.up = velocity;
         transform.position += velocity * Time.deltaTime;
     }
