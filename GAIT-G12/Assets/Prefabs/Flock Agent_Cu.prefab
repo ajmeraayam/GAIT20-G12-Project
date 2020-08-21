@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 227566421406641598}
   - component: {fileID: 5531031814265500680}
   m_Layer: 0
-  m_Name: Flock Agent
+  m_Name: Flock Agent_Cu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
