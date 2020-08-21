@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9cc97ea0570924eaff5171b7124749, type: 3}
-  m_Name: Composite
+  m_Name: Leader Following Flock
   m_EditorClassIdentifier: 
   behaviours:
   - {fileID: 11400000, guid: c0630143cd5dff0458cac6b35beb1e28, type: 2}
@@ -20,5 +20,5 @@ MonoBehaviour:
   weights:
   - 1
   - 2
+  - 4
   - 1
-  - 0

@@ -7,8 +7,8 @@ public class Flock : MonoBehaviour
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
-    [Range(10, 50)] public int startCount = 25;
-    const float agentDensity = 0.3f;
+    [Range(10, 250)] public int startCount = 25;
+    const float agentDensity = 0.08f;
     [Range(1f, 100f)] public float driveFactor = 10f;
     //MaxSpeed is for flock 
     //float maxSpeed;
@@ -34,7 +34,7 @@ public class Flock : MonoBehaviour
         {
             FlockAgent newAgent = Instantiate(agentPrefab, Random.insideUnitCircle * startCount * agentDensity, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), transform);
             newAgent.name = "Agent " + i;
-            //newAgent.Initialize(this);
+            newAgent.Initialize(this);
             agents.Add(newAgent);
         }
     }
@@ -73,6 +73,10 @@ public class Flock : MonoBehaviour
         return context;
     }
 
+    /*public GameObject Target()
+    {
+        return GameObject.FindWithTag("Target");
+    }*/
     /*void Start()
     {
         squareMaxSpeed = maxSpeed * maxSpeed;

@@ -12,6 +12,10 @@ public class FlockAgent : MonoBehaviour
     //Use tags
     Collider agentCollider;
     public Collider AgentCollider { get { return agentCollider; } }
+
+    Flock agentFlock;
+    public Flock AgentFlock { get { return agentFlock; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,10 @@ public class FlockAgent : MonoBehaviour
         //transform.gameObject.tag = "Human";
     }
 
+    public void Initialize(Flock flock)
+    {
+        agentFlock = flock;
+    }
     public void Move(Vector3 velocity)
     {
         //currentVelocity = velocity;
