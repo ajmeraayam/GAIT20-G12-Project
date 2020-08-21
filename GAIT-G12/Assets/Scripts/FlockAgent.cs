@@ -16,12 +16,12 @@ public class FlockAgent : MonoBehaviour
     void Start()
     {
         agentCollider = GetComponent<Collider>();
-        transform.gameObject.tag = "Human";
+        //transform.gameObject.tag = "Human";
     }
 
     public void Move(Vector3 velocity)
     {
-        currentVelocity = velocity;
+        //currentVelocity = velocity;
         transform.up = velocity;
         transform.position += velocity * Time.deltaTime;
     }
