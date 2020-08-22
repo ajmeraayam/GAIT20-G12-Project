@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 130196071}
   - component: {fileID: 130196070}
   m_Layer: 8
-  m_Name: Grid
+  m_Name: SpriteGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25967,19 +25967,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2080693594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080693588}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440df04a8795c8d4f966591f96483db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentVel: {x: 0, y: 0}
 --- !u!58 &2080693595
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -26189,7 +26176,7 @@ PrefabInstance:
     - target: {fileID: 8232961910819926411, guid: fdd2bb038c1d34c4a870dc162ce45d47,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8232961910819926453, guid: fdd2bb038c1d34c4a870dc162ce45d47,
         type: 3}
