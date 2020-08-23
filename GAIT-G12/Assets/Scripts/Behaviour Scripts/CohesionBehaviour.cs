@@ -5,20 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behaviour/Cohesion")]
 public class CohesionBehaviour : FilteredFlockBehaviour
 {
-    public override Vector3 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         if(context.Count == 0)
-            return Vector3.zero;
+            return Vector2.zero;
 
-        Vector3 cohesionMove = Vector3.zero;
+        Vector2 cohesionMove = Vector2.zero;
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
 
         foreach(Transform t in filteredContext)
         {
-            cohesionMove += t.position;
+            cohesionMove += (Vector2) t.position;
         }
         cohesionMove /= context.Count;
-        cohesionMove -= agent.transform.position;
+        cohesionMove -= (Vector2) agent.transform.position;
         return cohesionMove;
     }
 }

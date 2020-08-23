@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class FlockAgent : MonoBehaviour
 {
-    Vector3 currentVelocity;
-    public Vector3 CurrentVelocity { get { return currentVelocity; } }
+    Vector2 currentVelocity;
+    public Vector2 CurrentVelocity { get { return currentVelocity; } }
     float maxVelocity = 5f;
     public float MaxVelocity { get { return maxVelocity; } }
     //Use tags
@@ -27,10 +27,10 @@ public class FlockAgent : MonoBehaviour
     {
         agentFlock = flock;
     }
-    public void Move(Vector3 velocity)
+    public void Move(Vector2 velocity)
     {
         currentVelocity = velocity;
         transform.up = velocity;
-        transform.position += velocity * Time.deltaTime;
+        transform.position += (Vector3) velocity * Time.deltaTime;
     }
 }

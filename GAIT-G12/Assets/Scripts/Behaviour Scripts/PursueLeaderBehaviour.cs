@@ -6,10 +6,10 @@ using UnityEngine;
 public class PursueLeaderBehaviour : FlockBehaviour
 {
     float maxForce = 10f;
-    public override Vector3 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
-        Vector3 pursueMove = flock.FollowPoint - agent.transform.position;
-        Vector3 velocity = Vector3.zero;
+        Vector2 pursueMove = flock.FollowPoint - (Vector2) agent.transform.position;
+        Vector2 velocity = Vector2.zero;
         Vector3 flockSphereCenter = flock.FollowPoint;
         //- new Vector3(0f,2f,0f)
         Collider[] colliders = Physics.OverlapSphere(flockSphereCenter, 1f);
@@ -23,10 +23,10 @@ public class PursueLeaderBehaviour : FlockBehaviour
 
         if(!inRange)
         {
-            Vector3 desiredVelocity = pursueMove.normalized * agent.MaxVelocity;
-            Vector3 steering = desiredVelocity - agent.CurrentVelocity;
-            steering = Vector3.ClampMagnitude(steering, maxForce);
-            velocity = Vector3.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);
+            Vector2 desiredVelocity = pursueMove.normalized * agent.MaxVelocity;
+            Vector2 steering = desiredVelocity - agent.CurrentVelocity;
+            steering = Vector2.ClampMagnitude(steering, maxForce);
+            velocity = Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);
         } 
         
         return velocity;

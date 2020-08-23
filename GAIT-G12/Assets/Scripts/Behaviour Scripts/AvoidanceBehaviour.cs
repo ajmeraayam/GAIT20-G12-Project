@@ -5,21 +5,22 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behaviour/Avoidance")]
 public class AvoidanceBehaviour : FilteredFlockBehaviour
 {
-    public override Vector3 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 calculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         if(context.Count == 0)
-            return Vector3.zero;
+            return Vector2.zero;
 
-        Vector3 avoidanceMove = Vector3.zero;
+        Vector2 avoidanceMove = Vector2.zero;
         int nAvoid = 0;
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
 
         foreach(Transform t in filteredContext)
         {
-            if((t.position - agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
+            //if((t.position - agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
+            if(((Vector2) t.position - (Vector2) agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
             {
                 nAvoid++;
-                avoidanceMove += agent.transform.position - t.position;
+                avoidanceMove += (Vector2) (agent.transform.position - t.position);
             }
         }
         
