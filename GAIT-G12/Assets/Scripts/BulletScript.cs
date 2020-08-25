@@ -15,9 +15,22 @@ public class BulletScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo) {
-        if(hitInfo.tag != "Player") {
-            Destroy(gameObject);
+
+        switch (hitInfo.tag) {
+            case "Enemy":
+                Destroy(hitInfo.gameObject);
+                Destroy(gameObject);
+                break;
+            case "Obstacle":
+                Destroy(gameObject);
+                break;
+
         }
+        //if (hitInfo.tag != "Player") {
+        //    Destroy(gameObject);
+        //} else if(hitInfo)
+
+               
     }
 
 }
