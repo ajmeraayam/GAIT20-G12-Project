@@ -30,11 +30,6 @@ public class CompositeBehaviour : FlockBehaviour
                 move += partialMove;
             }
         }   
-        /*target = flock.Target();
-        for(int i = 0; i < context.Count; i++)
-        {
-
-        }*/
 
         return move;
     }

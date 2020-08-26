@@ -1633,8 +1633,7 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: f2a5bb6aef81ee144bd35d875c46f2e1, type: 2}
   startCount: 50
   driveFactor: 10
-  maxSpeed: 2
-  neighbourRadius: 1.5
+  neighbourRadius: 2
   avoidanceRadiusMultiplier: 0.5
 --- !u!4 &1194191119
 Transform:
@@ -2163,8 +2162,7 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: f2a5bb6aef81ee144bd35d875c46f2e1, type: 2}
   startCount: 50
   driveFactor: 10
-  maxSpeed: 2
-  neighbourRadius: 1.5
+  neighbourRadius: 2
   avoidanceRadiusMultiplier: 0.5
 --- !u!1 &1936025153
 GameObject:

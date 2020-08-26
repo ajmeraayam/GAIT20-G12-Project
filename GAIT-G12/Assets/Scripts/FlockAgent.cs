@@ -20,6 +20,7 @@ public class FlockAgent : MonoBehaviour
     void Start()
     {
         agentCollider = GetComponent<Collider>();
+        //Use spawner script to provide tags
         transform.gameObject.tag = "Human";
     }
 
