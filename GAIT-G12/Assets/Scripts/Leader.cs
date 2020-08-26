@@ -18,9 +18,9 @@ public class Leader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider[] agentsInRadius = Physics.OverlapSphere(transform.position, visibilityRadius);
+        Collider2D[] agentsInRadius = Physics2D.OverlapCircleAll(transform.position, visibilityRadius);
 
-        foreach(Collider c in agentsInRadius)
+        foreach(Collider2D c in agentsInRadius)
         {
             if(c.tag == "Human")
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 public class FlockAgent : MonoBehaviour
 {
     Vector2 currentVelocity;
@@ -10,8 +10,8 @@ public class FlockAgent : MonoBehaviour
     float maxVelocity = 1f;
     public float MaxVelocity { get { return maxVelocity; } set { maxVelocity = value; } }
     //Use tags
-    Collider agentCollider;
-    public Collider AgentCollider { get { return agentCollider; } }
+    Collider2D agentCollider;
+    public Collider2D AgentCollider { get { return agentCollider; } }
 
     Flock agentFlock;
     public Flock AgentFlock { get { return agentFlock; } }
@@ -19,9 +19,9 @@ public class FlockAgent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agentCollider = GetComponent<Collider>();
+        agentCollider = GetComponent<Collider2D>();
         //Use spawner script to provide tags
-        transform.gameObject.tag = "Human";
+        //transform.gameObject.tag = "Human";
     }
 
     public void Initialize(Flock flock)

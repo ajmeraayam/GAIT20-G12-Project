@@ -10,12 +10,12 @@ public class PursueLeaderBehaviour : FlockBehaviour
     {
         Vector2 pursueMove = flock.FollowPoint - (Vector2) agent.transform.position;
         Vector2 velocity = Vector2.zero;
-        Vector3 flockSphereCenter = flock.FollowPoint;
+        Vector2 flockSphereCenter = flock.FollowPoint;
         //- new Vector3(0f,2f,0f)
-        Collider[] colliders = Physics.OverlapSphere(flockSphereCenter, 1f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(flockSphereCenter, 1f);
         bool inRange = false;
 
-        foreach(Collider c in colliders)
+        foreach(Collider2D c in colliders)
         {
             if(c == agent.AgentCollider)
                 inRange = true;

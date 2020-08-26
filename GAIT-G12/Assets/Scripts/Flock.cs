@@ -7,12 +7,10 @@ public class Flock : MonoBehaviour
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
-    [Range(10, 250)] public int startCount = 25;
+    [Range(1, 250)] public int startCount = 25;
     const float agentDensity = 0.08f;
     [Range(1f, 100f)] public float driveFactor = 10f;
     float maxSpeed;
-    //[Range(1f, 10f)] public float maxSpeed = 2f;
-    //[Range(1f, 10f)] public float neighbourRadius = 2f;
     [Range(1f, 10f)] public float neighbourRadius = 2f;
     [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
 
@@ -113,9 +111,11 @@ public class Flock : MonoBehaviour
     List<Transform> GetNearbyObjects(FlockAgent agent)
     {
         List<Transform> context = new List<Transform>();
-        Collider[] contextColliders = Physics.OverlapSphere(agent.transform.position, neighbourRadius);
-        foreach(Collider col in contextColliders)
+        //Collider[] contextColliders = Physics.OverlapSphere(agent.transform.position, neighbourRadius);
+        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighbourRadius);
+        foreach(Collider2D col in contextColliders)
         {
+            print(col);
             //test after removing player tag condition
             if(col != agent.AgentCollider)
             {
@@ -129,7 +129,7 @@ public class Flock : MonoBehaviour
     public void AddAgent(FlockAgent agent)
     {
         //Change tags. Remove tag assignment line before submission
-        agent.transform.gameObject.tag = "In Flock";
+        //agent.transform.gameObject.tag = "In Flock";
         agents.Add(agent);
     }
 
