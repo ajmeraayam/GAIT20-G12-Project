@@ -22,7 +22,7 @@ public class Flock : MonoBehaviour
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
     Vector2 followPoint;
     public Vector2 FollowPoint { get { return followPoint; } }
-    string tag_local; 
+    string tag_local = null; 
     float maxForce = 10f;
     
     void Start()
@@ -39,13 +39,13 @@ public class Flock : MonoBehaviour
         {
             tag_local = null;
             followPoint = Vector2.zero;
-            for (int i = 0; i < startCount; i++)
+            /*for (int i = 0; i < startCount; i++)
             {
                 FlockAgent newAgent = Instantiate(agentPrefab, Random.insideUnitCircle * startCount * agentDensity, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), transform);
                 newAgent.name = "Agent " + i;
                 newAgent.Initialize(this);
                 agents.Add(newAgent);
-            }
+            }*/
         }
     }
 
@@ -92,13 +92,14 @@ public class Flock : MonoBehaviour
             }
             else
             {
-                maxSpeed = agent.MaxVelocity;
-                squareMaxSpeed = maxSpeed * maxSpeed;
                 move = behaviour.calculateMove(agent, context, this);
                 //if(distance.magnitude > 0.1f)
                 //    move += seekForce(agent, desiredVelocity); 
                 move *= driveFactor;
                 
+                maxSpeed = agent.MaxVelocity;
+                squareMaxSpeed = maxSpeed * maxSpeed;
+
                 if (move.sqrMagnitude > squareMaxSpeed)
                 {
                     move = move.normalized * maxSpeed;

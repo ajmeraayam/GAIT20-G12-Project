@@ -7,8 +7,8 @@ public class FlockAgent : MonoBehaviour
 {
     Vector2 currentVelocity;
     public Vector2 CurrentVelocity { get { return currentVelocity; } }
-    float maxVelocity = 5f;
-    public float MaxVelocity { get { return maxVelocity; } }
+    float maxVelocity = 1f;
+    public float MaxVelocity { get { return maxVelocity; } set { maxVelocity = value; } }
     //Use tags
     Collider agentCollider;
     public Collider AgentCollider { get { return agentCollider; } }

@@ -31,11 +31,16 @@ public class PursueTargetBehaviour : FlockBehaviour
 
         if(target != null)
         {
+            agent.MaxVelocity = 3f;
             Vector2 pursueMove = (Vector2) target.transform.position - (Vector2) agent.transform.position;
             Vector2 desiredVelocity = pursueMove.normalized * agent.MaxVelocity;
             Vector2 steering = desiredVelocity - agent.CurrentVelocity;
             steering = Vector2.ClampMagnitude(steering, maxForce);
             velocity = Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);
+        }
+        else
+        {
+            agent.MaxVelocity = 1f;
         }
 
         return velocity;
