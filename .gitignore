@@ -16,7 +16,7 @@ GAIT-G12/[Uu]ser[Ss]ettings/
 GAIT-G12/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
-GAIT-G12/[Aa]ssets/**/*.meta
+#GAIT-G12/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
