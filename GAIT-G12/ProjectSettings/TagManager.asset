@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Human
+  - In Flock
+  - Target
   - Enemy
   - Obstacle
-  - Human
+  
   layers:
   - Default
   - TransparentFX
@@ -16,6 +19,7 @@ TagManager:
   - UI
   - 
   - 
+  - Obstacle
   - Ground
   - 
   - 
