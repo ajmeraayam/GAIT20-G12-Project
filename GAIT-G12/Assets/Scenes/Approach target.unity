@@ -223,6 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844146185}
   - component: {fileID: 844146186}
+  - component: {fileID: 844146187}
   m_Layer: 0
   m_Name: Flock
   m_TagString: Untagged
@@ -263,6 +264,23 @@ MonoBehaviour:
   driveFactor: 10
   neighbourRadius: 1.5
   avoidanceRadiusMultiplier: 0.5
+--- !u!114 &844146187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844146184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42e37e9e46fb7248bd98ab3d7547847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 5531031814265500680, guid: f7c0cdfef4cdb6640b2a8d24853f62d6,
+    type: 3}
+  startingCount: 15
+  AgentDensity: 0.08
+  radius: 5
 --- !u!1 &948841055
 GameObject:
   m_ObjectHideFlags: 0

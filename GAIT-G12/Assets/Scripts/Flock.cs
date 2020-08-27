@@ -115,7 +115,7 @@ public class Flock : MonoBehaviour
         Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighbourRadius);
         foreach(Collider2D col in contextColliders)
         {
-            print(col);
+            //print(col);
             //test after removing player tag condition
             if(col != agent.AgentCollider)
             {
@@ -151,4 +151,8 @@ public class Flock : MonoBehaviour
         }
         return (center / count);
     }*/
+    public void printMessage(string message)
+    {
+        print(message);
+    }
 }
