@@ -18,7 +18,7 @@ public class BulletScript : MonoBehaviour
 
         switch (hitInfo.tag) {
             case "Enemy":
-                Destroy(hitInfo.gameObject);
+                hitInfo.gameObject.GetComponent<FlockAgent>().DestroyAgent();
                 Destroy(gameObject);
                 break;
             case "Obstacle":

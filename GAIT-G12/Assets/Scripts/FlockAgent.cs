@@ -34,4 +34,9 @@ public class FlockAgent : MonoBehaviour
         transform.up = velocity;
         transform.position += (Vector3) velocity * Time.deltaTime;
     }
+
+    public void DestroyAgent()
+    {
+        agentFlock.RemoveAgent(this);
+    }
 }

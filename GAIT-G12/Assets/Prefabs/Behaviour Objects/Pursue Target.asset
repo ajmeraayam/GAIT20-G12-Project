@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pursue Target
   m_EditorClassIdentifier: 
   radius: 10
-  wanderSpeed: 3
-  pursueTargetSpeed: 10
+  wanderSpeed: 1
+  pursueTargetSpeed: 5

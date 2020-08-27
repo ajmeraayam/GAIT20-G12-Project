@@ -13,14 +13,14 @@ public class PhysicsLayerFilter : ContextFilter
 
         foreach(Transform item in original)
         {
-            /*if(mask == (mask | 1 << item.gameObject.layer))
-            {
-                filtered.Add(item);
-            }*/
-            if(item.tag == "Obstacle")
+            if(mask == (mask | 1 << item.gameObject.layer))
             {
                 filtered.Add(item);
             }
+            /*if(item.tag == "Obstacle")
+            {
+                filtered.Add(item);
+            }*/
         }
         
         return filtered;

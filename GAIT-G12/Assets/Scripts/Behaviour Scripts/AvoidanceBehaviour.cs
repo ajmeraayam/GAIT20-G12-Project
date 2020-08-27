@@ -17,13 +17,13 @@ public class AvoidanceBehaviour : FilteredFlockBehaviour
 
         foreach(Transform t in filteredContext)
         {
-            if(t.gameObject.name == "Hills_9")
-                flock.printMessage("Name - " + t.gameObject.name + "Position - " + t.position + ", Tag - " + t.tag);
-            //if((t.position - agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
-            if(((Vector2) t.position - (Vector2) agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
+            Collider2D col2d = t.GetComponent<Collider2D>();
+            Vector2 closestPoint = col2d.ClosestPoint(agent.transform.position);
+            
+            if((closestPoint - (Vector2) agent.transform.position).sqrMagnitude < flock.SquareAvoidanceRadius)
             {
                 nAvoid++;
-                avoidanceMove += (Vector2) (agent.transform.position - t.position);
+                avoidanceMove += ((Vector2) agent.transform.position - closestPoint);
             }
         }
         

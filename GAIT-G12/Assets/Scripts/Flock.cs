@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Flock : MonoBehaviour
 {
-    public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
-    [Range(1, 250)] public int startCount = 25;
-    const float agentDensity = 0.08f;
     [Range(1f, 100f)] public float driveFactor = 10f;
     float maxSpeed;
     [Range(1f, 10f)] public float neighbourRadius = 2f;
-    [Range(0f, 1f)] public float avoidanceRadiusMultiplier = 0.5f;
+    [Range(0f, 5f)] public float avoidanceRadiusMultiplier = 0.5f;
 
     float squareMaxSpeed;
     float squareNeighbourRadius;
@@ -91,8 +88,6 @@ public class Flock : MonoBehaviour
             else
             {
                 move = behaviour.calculateMove(agent, context, this);
-                //if(distance.magnitude > 0.1f)
-                //    move += seekForce(agent, desiredVelocity); 
                 move *= driveFactor;
                 
                 maxSpeed = agent.MaxVelocity;
@@ -115,7 +110,6 @@ public class Flock : MonoBehaviour
         Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighbourRadius);
         foreach(Collider2D col in contextColliders)
         {
-            //print(col);
             //test after removing player tag condition
             if(col != agent.AgentCollider)
             {
@@ -133,26 +127,15 @@ public class Flock : MonoBehaviour
         agents.Add(agent);
     }
 
-    /*private Vector2 seekForce(FlockAgent agent, Vector2 desiredVelocity)
+    public void RemoveAgent(FlockAgent agent)
     {
-        Vector2 steering = desiredVelocity - agent.CurrentVelocity;
-        steering = Vector2.ClampMagnitude(steering, maxForce);
-        return Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);
-    }
-    private Vector2 findCenter()
-    {
-        Vector2 center = new Vector2(0f, 0f);
-        float count = 0f;
-        
-        foreach(FlockAgent agent in agents)
+        if(agents.Contains(agent))
         {
-            center += (Vector2) agent.gameObject.transform.position;
-            count++;
+            bool cond = agents.Remove(agent);
+            if(cond)
+            {
+                Destroy(agent.gameObject);
+            }
         }
-        return (center / count);
-    }*/
-    public void printMessage(string message)
-    {
-        print(message);
     }
 }
