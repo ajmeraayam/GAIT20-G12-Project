@@ -15,9 +15,12 @@ public class BulletScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo) {
-
+        /*
+         * If bullet hits an enemy gameobject, then destroy the enemy and the bullet
+         * If bullet hits an obstacle, destroy the bullet
+         */
         switch (hitInfo.tag) {
-            case "Enemy":
+            case "Enemy": 
                 hitInfo.gameObject.GetComponent<FlockAgent>().DestroyAgent();
                 Destroy(gameObject);
                 break;
