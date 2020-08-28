@@ -27,7 +27,7 @@ public class PursueTargetBehaviour : FlockBehaviour
                 target = collider.gameObject;
                 break;
             }
-            else if(collider.gameObject.CompareTag("Human"))
+            else if(collider.gameObject.tag == "Human")
             {
                 target = collider.gameObject;
             }
