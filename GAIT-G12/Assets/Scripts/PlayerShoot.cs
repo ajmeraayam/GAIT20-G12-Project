@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    // Point from where bullet should originate
     public Transform shootPoint;
+    // Prefab of bullet
     public GameObject bulletPrefab;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +17,8 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void shoot() {
+    private void shoot() 
+    {
         Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
     }
 }
