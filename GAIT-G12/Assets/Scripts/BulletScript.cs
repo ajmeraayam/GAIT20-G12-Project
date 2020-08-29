@@ -19,6 +19,9 @@ public class BulletScript : MonoBehaviour
         switch (hitInfo.tag) {
             case "Enemy":
                 hitInfo.gameObject.GetComponent<FlockAgent>().DestroyAgent();
+
+                //increase score by 1 whenever a zombie is killed
+                GameManagerScript.Instance.increaseScore(1);
                 Destroy(gameObject);
                 break;
             case "Obstacle":

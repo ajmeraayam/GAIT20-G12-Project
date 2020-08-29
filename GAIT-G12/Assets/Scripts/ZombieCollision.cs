@@ -21,7 +21,7 @@ public class ZombieCollision : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealth>().ReduceHealth();
+            GameManagerScript.Instance.reducePlayerHealth(5);
         }
     }
 }
