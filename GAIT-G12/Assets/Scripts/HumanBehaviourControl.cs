@@ -7,7 +7,7 @@ public class HumanBehaviourControl : MonoBehaviour
 {
     // behaviour script and player object
     public GameObject player;
-    public bool isFollowPlayer;
+    private bool isFollowPlayer;
     AILerp pathFollowCompo1;
     AIDestinationSetter pathFollowCompo2;
     Seeker pathFollowCompo3;
@@ -39,6 +39,7 @@ public class HumanBehaviourControl : MonoBehaviour
     void Update()
     {
         bool shouldFollowPlayer = isInPlayerRange();
+
         // if in player range, turn off wandering/flee, turn on following
         if (shouldFollowPlayer && isFollowPlayer == false)
         {
@@ -48,6 +49,7 @@ public class HumanBehaviourControl : MonoBehaviour
             pathFollowCompo2.enabled = true;
             pathFollowCompo3.enabled = true;
             isFollowPlayer = true;
+            player.GetComponent<PlayerManager>().humanFollow();
             
         }
         else if (!shouldFollowPlayer && isFollowPlayer != false)
@@ -58,9 +60,10 @@ public class HumanBehaviourControl : MonoBehaviour
             pathFollowCompo3.enabled = false;
             isFollowPlayer = false;
             wander.enabled = true;
+            player.GetComponent<PlayerManager>().humanUnfollow();
 
         }
-        // if being chased by zombie and not following player, turn off wandering, turn on flee
+        
 
     }
 
