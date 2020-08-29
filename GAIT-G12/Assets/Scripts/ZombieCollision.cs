@@ -24,9 +24,10 @@ public class ZombieCollision : MonoBehaviour
             Vector3 position = other.gameObject.transform.position;
             Quaternion rotation = other.gameObject.transform.rotation;
             // Add the functionality for checking the list of humans that are following the Player and removing the human if it is in the list. Compare gameobjects
+            GameManagerScript.Instance.RemoveHumanFromList(other.gameObject);
             // Remove the human gameobject and replace it with zombie gameobject
             Destroy(other.gameObject);
-            // The human is added to a flock. 
+            // The human (converted to zombie) is added to a flock. 
             // This is determined by the zombie that killed the human and what flock it belonged to.
             GameObject flockObject = gameObject.GetComponent<FlockAgent>().AgentFlock.gameObject;
             flockObject.GetComponent<RandomSpawner>().InstantiateAgent(position, rotation);
