@@ -54,7 +54,7 @@ public class PursueTargetBehaviour : FlockBehaviour
          */
         if(target != null)
         {
-            // Change the maximum velocity of the agent
+            /*
             agent.MaxVelocity = pursueTargetSpeed;
             // Calculate the distance between the agent and the target
             Vector2 pursueMove = (Vector2) (target.transform.position - agent.transform.position);
@@ -66,7 +66,21 @@ public class PursueTargetBehaviour : FlockBehaviour
             // Clamp this steering force with the maximum force that can be applied on an agent
             steering = Vector2.ClampMagnitude(steering, maxForce);
             // Also clamp the velocity of the agent to the maximum velocity defined for the agent
-            velocity = Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);
+            velocity = Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);*/
+            
+            // Change the maximum velocity of the agent
+            agent.MaxVelocity = pursueTargetSpeed;
+            // Velocity of the target
+            Vector2 targetVelocity = target.GetComponent<Rigidbody2D>().velocity;
+            // Update interval used to find targets future position
+            float interval = (target.transform.position - agent.transform.position).magnitude / pursueTargetSpeed;
+            // Use vector subtraction to find vector between target and the agent
+            Vector2 direction = ((Vector2)target.transform.position + targetVelocity * interval) - (Vector2)agent.transform.position;
+            //Normalize direction vector to get the desired velocity
+            direction.Normalize();
+            // Steer towards the direction of the movement by target
+            Vector2 steering = direction - velocity;
+            velocity = velocity + steering;
         }
         else
         {
