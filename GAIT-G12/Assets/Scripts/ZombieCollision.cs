@@ -13,7 +13,7 @@ public class ZombieCollision : MonoBehaviour
         // If zombie collides with player, it reduces the players health
         if(other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealth>().ReduceHealth();
+            GameManagerScript.Instance.reducePlayerHealth(5);
         }
         /*
          * If zombie collides with a human, it kills the human and converts it to a zombie
