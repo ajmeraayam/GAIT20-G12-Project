@@ -21,6 +21,7 @@ public class HumanBehaviourControl : MonoBehaviour
     public float dangerRadius = 3f;
     public float playerRadius = 10f;
     public float wanderSpeed = 3;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -63,11 +64,12 @@ public class HumanBehaviourControl : MonoBehaviour
             flee.enabled = false;
             AISetter.target = player.transform;
             isFollowPlayer = true;
-            pathFollowCompo1.speed = player.GetComponent<PlayerMovement>().speed;
+            pathFollowCompo1.speed = player.GetComponent<PlayerMovement>().speed*0.5f;
             gameManager.GetComponent<GameManagerScript>().AddHumanToList(gameObject);
 
 
         }
+        // if not in player range, turn off following/flee, start wandering
         else if (!shouldFollowPlayer)
         {
             flee.enabled = false;
@@ -79,7 +81,7 @@ public class HumanBehaviourControl : MonoBehaviour
             
         }
         
-        
+        // check whether has zombie in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, dangerRadius);
 
         bool hasZombie = false;
