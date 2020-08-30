@@ -654,7 +654,7 @@ namespace Pathfinding
 			if (updatePosition) simulatedPosition = tr.position;
 			if (updateRotation) simulatedRotation = tr.rotation;
 
-			/*
+			
 			Vector3 direction;
 			Debug.Log("current Position: " + transform.position.ToString());
 			nextPosition = CalculateNextPosition(out direction, isStopped ? 0f : deltaTime);
@@ -673,8 +673,8 @@ namespace Pathfinding
 			transform.position += currentVelocity * Time.deltaTime;
 			Debug.Log("new position: " + transform.position.ToString());
 			transform.forward = currentVelocity.normalized;
-			*/
-
+			
+			/*
 			Vector3 direction;
 			Debug.Log("current Position: " + transform.position.ToString());
 			nextPosition = CalculateNextPosition(out direction, isStopped ? 0f : deltaTime);
@@ -690,7 +690,7 @@ namespace Pathfinding
 			Debug.Log("steering velocity: " + steering.ToString());
 			transform.position += steering * Time.deltaTime;
 			Debug.Log("new position: " + transform.position.ToString());
-
+			*/
 
 			if (enableRotation) nextRotation = SimulateRotationTowards(direction, deltaTime);
 			else nextRotation = simulatedRotation;

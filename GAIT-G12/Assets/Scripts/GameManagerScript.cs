@@ -13,7 +13,7 @@ public class GameManagerScript : MonoBehaviour
     public int playerHealth = 100;
     private bool gameOver = false;
     // List to store gameobjects of humans that are saved
-    private List<GameObject> humansSaved;
+    private HashSet<GameObject> humansSaved;
 
     // Returning the only instance for this class
     public static GameManagerScript Instance {
@@ -30,7 +30,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         instance = GetComponent<GameManagerScript>();
-        humansSaved = new List<GameObject>();
+        humansSaved = new HashSet<GameObject>();
     }
 
     /*
@@ -102,15 +102,23 @@ public class GameManagerScript : MonoBehaviour
         humansSaved.Add(human);
     }
 
-    // Remove human gameobject if it exists in the list
     public void RemoveHumanFromList(GameObject human)
     {
-        for(int i = 0; i < humansSaved.Count; i++)
+        humansSaved.Remove(human);
+    }
+
+        /*
+        // Remove human gameobject if it exists in the list
+        public void RemoveHumanFromList(GameObject human)
         {
-            if(humansSaved[i].GetInstanceID() == human.GetInstanceID())
+
+            for(int i = 0; i < humansSaved.Count; i++)
             {
-                humansSaved.RemoveAt(i);
+                if(humansSaved[i].GetInstanceID() == human.GetInstanceID())
+                {
+                    humansSaved.RemoveAt(i);
+                }
             }
         }
+        */
     }
-}

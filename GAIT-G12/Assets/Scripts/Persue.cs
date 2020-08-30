@@ -49,5 +49,7 @@ public class Persue : MonoBehaviour
         currentVel = currentVel + steering;
 
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
+
+        target.GetComponent<HumanBehaviourControl>().startFlee();
     }
 }
