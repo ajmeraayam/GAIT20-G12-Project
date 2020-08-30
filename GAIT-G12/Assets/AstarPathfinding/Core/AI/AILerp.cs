@@ -672,10 +672,11 @@ namespace Pathfinding
 			steering /= 15;
 			Debug.Log("steering velocity: " + steering.ToString());
 			currentVelocity = Vector3.ClampMagnitude(currentVelocity + steering, maxVelocity);
+			transform.up = currentVelocity;
 			transform.position += currentVelocity * Time.deltaTime;
 			Debug.Log("new position: " + transform.position.ToString());
 			//transform.forward = currentVelocity.normalized;
-			//transform.up = currentVelocity.normalized;
+			
 
 
 			/*
@@ -719,7 +720,7 @@ namespace Pathfinding
 			{
 				Quaternion targetRotation = Quaternion.LookRotation(direction, orientation == OrientationMode.YAxisForward ? Vector3.back : Vector3.up);
 				// This causes the character to only rotate around the Z axis
-				if (orientation == OrientationMode.YAxisForward) targetRotation *= Quaternion.Euler(90, 0, 0);
+				if (orientation == OrientationMode.YAxisForward) targetRotation *= Quaternion.Euler(90, 0, 90);
 				return Quaternion.Slerp(simulatedRotation, targetRotation, deltaTime * rotationSpeed);
 			}
 			return simulatedRotation;
