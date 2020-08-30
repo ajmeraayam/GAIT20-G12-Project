@@ -53,21 +53,7 @@ public class PursueTargetBehaviour : FlockBehaviour
          * If there are no targets in the area, then keep moving at the speed defined in wanderSpeed
          */
         if(target != null)
-        {
-            /*
-            agent.MaxVelocity = pursueTargetSpeed;
-            // Calculate the distance between the agent and the target
-            Vector2 pursueMove = (Vector2) (target.transform.position - agent.transform.position);
-            // Normalize the distance and multiply max velocity
-            // Vector2.normalized will give a vector of length 1 with the same direction
-            Vector2 desiredVelocity = pursueMove.normalized * agent.MaxVelocity;
-            // Steer the agent towards the direction we want it to move.
-            Vector2 steering = desiredVelocity - agent.CurrentVelocity;
-            // Clamp this steering force with the maximum force that can be applied on an agent
-            steering = Vector2.ClampMagnitude(steering, maxForce);
-            // Also clamp the velocity of the agent to the maximum velocity defined for the agent
-            velocity = Vector2.ClampMagnitude(agent.CurrentVelocity + steering, agent.MaxVelocity);*/
-            
+        {   
             // Change the maximum velocity of the agent
             agent.MaxVelocity = pursueTargetSpeed;
             // Velocity of the target
