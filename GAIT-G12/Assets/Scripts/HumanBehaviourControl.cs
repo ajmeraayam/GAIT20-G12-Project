@@ -18,7 +18,8 @@ public class HumanBehaviourControl : MonoBehaviour
     public GameObject wanderTarget;
     private bool isFollowPlayer;
     private bool isFlee;
-    private float radius = 3;
+    public float dangerRadius = 3f;
+    public float playerRadius = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +88,7 @@ public class HumanBehaviourControl : MonoBehaviour
         }
         
         
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, dangerRadius);
 
         bool hasZombie = false;
             
@@ -116,7 +117,7 @@ public class HumanBehaviourControl : MonoBehaviour
 
     private bool isInPlayerRange()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 20)
+        if (Vector3.Distance(transform.position, player.transform.position) < playerRadius)
             return true;
         return false;
     }

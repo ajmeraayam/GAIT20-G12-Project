@@ -7,10 +7,10 @@ public class Flee : MonoBehaviour {
     private GameObject enemy;
     
     private Vector2 movement, desiredVel, steering, enemyVel;
-    private float speed = 2.0f;
+    public float speed = 2.0f;
     private float angle, interval;
 
-    public Vector2 currentVel;
+    Vector2 currentVel;
 
 
     // Start is called before the first frame update
@@ -26,7 +26,8 @@ public class Flee : MonoBehaviour {
     void Update() {
         Debug.Log("I am running");
         //Update the enemy's velocity
-        enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
+        //enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
+        enemyVel = enemy.GetComponent<FlockAgent>().CurrentVelocity;
         //enemyVel = enemy.GetComponent<Persue>().currentVel;
 
         //update interval used to find targets enemy's future position
