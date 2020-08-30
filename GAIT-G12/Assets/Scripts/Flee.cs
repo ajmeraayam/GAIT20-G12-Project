@@ -17,7 +17,7 @@ public class Flee : MonoBehaviour {
         rigidBody = this.GetComponent<Rigidbody2D>();
         enemy = GameObject.FindWithTag("Enemy");
         currentVel = new Vector2(0.0f, 0.0f);
-        enemyVel = enemy.GetComponent<Persue>().currentVel;
+        //enemyVel = enemy.GetComponent<Persue>().currentVel;
 
     }
 

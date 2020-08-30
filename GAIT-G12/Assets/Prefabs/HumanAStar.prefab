@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 1980357684949738828}
   - component: {fileID: 1853922890050101054}
   - component: {fileID: 853088113723643448}
+  - component: {fileID: 7242243937885191997}
+  - component: {fileID: 7242243937885191996}
+  - component: {fileID: 7242243937885191999}
   m_Layer: 0
   m_Name: HumanAStar
   m_TagString: Human
@@ -30,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3140824827503908079}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 16.87759, y: -15.648868, z: 0}
+  m_LocalPosition: {x: -73.71648, y: 17.775894, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,7 +135,9 @@ MonoBehaviour:
   canSearch: 1
   canMove: 1
   speed: 3
-  orientation: 0
+  maxVelocity: 3
+  maxForce: 15
+  orientation: 1
   enableRotation: 1
   rotationSpeed: 10
   interpolatePathSwitches: 1
@@ -199,3 +204,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.21}
   m_EdgeRadius: 0
+--- !u!114 &7242243937885191997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140824827503908079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce3c47d2c6384d428e77ffd60883d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7242243937885191996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140824827503908079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0bc3421e59328f42a5073248266c1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+--- !u!114 &7242243937885191999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140824827503908079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88788a1fd0fadce4aaf6278871f004bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVel: {x: 0, y: 0}
