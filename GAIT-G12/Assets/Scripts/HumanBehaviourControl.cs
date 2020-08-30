@@ -18,12 +18,12 @@ public class HumanBehaviourControl : MonoBehaviour
     public GameObject wanderTarget;
     private bool isFollowPlayer;
     private bool isFlee;
-
+    private float radius = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        // open wandering
+        // open wandering at start
         gameManager = GameObject.Find("GameManager");
         int num = Random.Range(1, 6);
         wanderTarget = GameObject.Find("WanderTarget" +num.ToString());
@@ -79,17 +79,38 @@ public class HumanBehaviourControl : MonoBehaviour
         else if (!shouldFollowPlayer)
         {
             flee.enabled = false;
-            //pathFollowCompo1.enabled = false;
-            //pathFollowCompo2.enabled = false;
-            //pathFollowCompo3.enabled = false;
             isFollowPlayer = false;
             wander.enabled = true;
             AISetter.target = wanderTarget.transform;
             gameManager.GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
             
         }
+        
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
 
+        bool hasZombie = false;
+            
+        /*
+         * For each collider that is in the given radius, check their tags
+         * If a collider has a tag 'Enemy, start to flee.
+         */
+        foreach (Collider2D collider in colliders)
+        { 
+            if (collider.gameObject.tag == "Enemy")
+            {
+                GetComponent<Flee>().setEnemy(collider.gameObject);
+                hasZombie = true;
+                startFlee();
+                break;
+            }
+            
+        }
 
+        if(isFlee && !hasZombie)
+        {
+            stopFlee();
+        }
 
     }
 
@@ -105,12 +126,14 @@ public class HumanBehaviourControl : MonoBehaviour
     {
         if (!isFollowPlayer)
         {
+            Debug.Log("Run me");
             wander.enabled = false;
             pathFollowCompo1.enabled = false;
             pathFollowCompo2.enabled = false;
             pathFollowCompo3.enabled = false;
             flee.enabled = true;
             pathFinding = false;
+            isFlee = true;
         }
     }
 

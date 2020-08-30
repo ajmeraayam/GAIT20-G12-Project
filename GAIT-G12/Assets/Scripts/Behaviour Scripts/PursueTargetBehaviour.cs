@@ -45,6 +45,8 @@ public class PursueTargetBehaviour : FlockBehaviour
             else if(collider.gameObject.tag == "Human")
             {
                 target = collider.gameObject;
+                //target.GetComponent<Flee>().setEnemy(agent);
+                //target.GetComponent<HumanBehaviourControl>().startFlee();
             }
         }
 
