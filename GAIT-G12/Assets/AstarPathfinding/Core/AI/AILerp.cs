@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Pathfinding {
 	using Pathfinding.Util;
-	// this file is change to steering path following, no longer linearly movement
 
 	/// <summary>
 	/// Linearly interpolating movement script.
@@ -54,8 +53,6 @@ namespace Pathfinding {
 
 		/// <summary>Speed in world units</summary>
 		public float speed = 3;
-		public float maxVelocity = 3;
-		public float maxForce = 15;
 
 		/// <summary>
 		/// Determines which direction the agent moves in.
@@ -573,142 +570,8 @@ namespace Pathfinding {
 			}
 		}
 
-		// rewrite and implement steering behaviour
-		protected virtual void Update()
-		{
-			if (shouldRecalculatePath) SearchPath();
-
-			if (canMove)
-			{
-				Vector3 nextPosition;
-				Quaternion nextRotation;
-				MovementUpdate(Time.deltaTime, out nextPosition, out nextRotation);
-				
-				//FinalizeMovement(nextPosition, nextRotation);
-				
-			}
-		}
-
-		public void MovementUpdate(float deltaTime, out Vector3 nextPosition, out Quaternion nextRotation)
-		{
-			if (updatePosition) simulatedPosition = tr.position;
-			if (updateRotation) simulatedRotation = tr.rotation;
-
-			/*
-			Vector3 direction;
-			Debug.Log("current Position: " + transform.position.ToString());
-			nextPosition = CalculateNextPosition(out direction, isStopped ? 0f : deltaTime);
-			Debug.Log("next Position: " + nextPosition.ToString());
-			var desiredVelocity = nextPosition - transform.position;
-			Debug.Log("desired velocity: " + desiredVelocity.ToString());
-			desiredVelocity = desiredVelocity.normalized * maxVelocity;
-			Vector3 currentVelocity = transform.position * deltaTime * speed;
-			Debug.Log("current velocity: " + currentVelocity.ToString());
-			var steering = desiredVelocity - currentVelocity;
-			steering = Vector3.ClampMagnitude(steering, maxForce);
-			//steering /= Mass;
-			steering /= 15;
-			Debug.Log("steering velocity: " + steering.ToString());
-			currentVelocity = Vector3.ClampMagnitude(currentVelocity + steering, maxVelocity);
-			transform.position += currentVelocity * Time.deltaTime;
-			Debug.Log("new position: " + transform.position.ToString());
-			transform.forward = currentVelocity.normalized;
-			*/
-
-			Vector3 direction;
-			Debug.Log("current Position: " + transform.position.ToString());
-			nextPosition = CalculateNextPosition(out direction, isStopped ? 0f : deltaTime);
-			Debug.Log("next Position: " + nextPosition.ToString());
-			Vector3 desiredVelocity = nextPosition - transform.position;
-			float distance = desiredVelocity.magnitude;
-			desiredVelocity = desiredVelocity.normalized * maxVelocity;
-			Debug.Log("desired velocity: " + desiredVelocity.ToString());
-			Vector3 currentVelocity = transform.position *deltaTime * speed;
-			Debug.Log("current velocity: " + currentVelocity.ToString());
-			Vector3 steering = desiredVelocity - currentVelocity;
-			Debug.Log("steering velocity: " + steering.ToString());
-			transform.position += steering * Time.deltaTime;
-			Debug.Log("new position: " + transform.position.ToString());
-
-
-			if (enableRotation) nextRotation = SimulateRotationTowards(direction, deltaTime);
-			else nextRotation = simulatedRotation;
-			
-		}
-
-
-		public void FinalizeMovement(Vector3 nextPosition, Quaternion nextRotation)
-		{
-			previousPosition2 = previousPosition1;
-			previousPosition1 = simulatedPosition = nextPosition;
-			simulatedRotation = nextRotation;
-			if (updatePosition) tr.position = nextPosition;
-			if (updateRotation) tr.rotation = nextRotation;
-		}
-
-
-		Quaternion SimulateRotationTowards(Vector3 direction, float deltaTime)
-		{
-			// Rotate unless we are really close to the target
-			if (direction != Vector3.zero)
-			{
-				Quaternion targetRotation = Quaternion.LookRotation(direction, orientation == OrientationMode.YAxisForward ? Vector3.back : Vector3.up);
-				// This causes the character to only rotate around the Z axis
-				if (orientation == OrientationMode.YAxisForward) targetRotation *= Quaternion.Euler(90, 0, 0);
-				return Quaternion.Slerp(simulatedRotation, targetRotation, deltaTime * rotationSpeed);
-			}
-			return simulatedRotation;
-		}
-
-		/// <summary>Calculate the AI's next position (ten frame in the future).</summary>
-		/// <param name="direction">The tangent of the segment the AI is currently traversing. Not normalized.</param>
-		protected virtual Vector3 CalculateNextPosition(out Vector3 direction, float deltaTime)
-		{
-			if (!interpolator.valid)
-			{
-				direction = Vector3.zero;
-				return simulatedPosition;
-			}
-
-			interpolator.distance += deltaTime * speed;
-
-			if (interpolator.remainingDistance < 0.0001f && !reachedEndOfPath)
-			{
-				reachedEndOfPath = true;
-				OnTargetReached();
-			}
-
-			direction = interpolator.tangent;
-			pathSwitchInterpolationTime += deltaTime;
-			var alpha = switchPathInterpolationSpeed * pathSwitchInterpolationTime;
-			if (interpolatePathSwitches && alpha < 1f)
-			{
-				// Find the approximate position we would be at if we
-				// would have continued to follow the previous path
-				Vector3 positionAlongPreviousPath = previousMovementOrigin + Vector3.ClampMagnitude(previousMovementDirection, speed * pathSwitchInterpolationTime);
-
-				// Interpolate between the position on the current path and the position
-				// we would have had if we would have continued along the previous path.
-				return Vector3.Lerp(positionAlongPreviousPath, interpolator.position, alpha);
-			}
-			else
-			{
-				return interpolator.position;
-			}
-		}
-
-		protected override int OnUpgradeSerializedData(int version, bool unityThread)
-		{
-#pragma warning disable 618
-			if (unityThread && targetCompatibility != null) target = targetCompatibility;
-#pragma warning restore 618
-			return 2;
-		}
-
-		/*
 		protected virtual void Update () {
 			if (shouldRecalculatePath) SearchPath();
-
 			if (canMove) {
 				Vector3 nextPosition;
 				Quaternion nextRotation;
@@ -787,9 +650,5 @@ namespace Pathfinding {
 			#pragma warning restore 618
 			return 2;
 		}
-
-	    */
 	}
-
-
 }
