@@ -23,18 +23,15 @@ public class Flee : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        Debug.Log("I am running");
+    void LateUpdate() {
         //Update the enemy's velocity
-        //enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         enemyVel = enemy.GetComponent<FlockAgent>().CurrentVelocity;
-        //enemyVel = enemy.GetComponent<Persue>().currentVel;
-
+        
         //update interval used to find targets enemy's future position
-        interval = (gameObject.transform.position - enemy.transform.position).magnitude / speed;
+        interval = (transform.position - enemy.transform.position).magnitude / speed;
 
         //use vector subtraction to find vector between enemy and current object
-        Vector2 direction = (Vector2)gameObject.transform.position - ((Vector2)enemy.transform.position + enemyVel * interval);
+        Vector2 direction = (Vector2) transform.position - ((Vector2)enemy.transform.position + enemyVel * interval);
 
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
         rigidBody.rotation = angle;
@@ -44,14 +41,7 @@ public class Flee : MonoBehaviour {
         steering = direction - currentVel;
         currentVel = currentVel + steering;
 
-        //Debugging: Move the gameobject up instead of fleeing
-        //currentVel = new Vector2(0.0f, 1.0f);
-        //rigidBody.MovePosition((Vector2)gameObject.transform.position + Vector2.up * Time.deltaTime * speed);
-
-        rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
-
-        
-        print("Current Vel " + currentVel);
+        rigidBody.MovePosition((Vector2) transform.position + (currentVel * speed * Time.deltaTime));
     }
 
     public void setEnemy(GameObject zombie)

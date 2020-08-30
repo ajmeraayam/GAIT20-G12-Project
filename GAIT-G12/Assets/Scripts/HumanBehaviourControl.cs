@@ -50,7 +50,7 @@ public class HumanBehaviourControl : MonoBehaviour
     void Update()
     {
         bool shouldFollowPlayer = isInPlayerRange();
-        if (!isFlee && pathFinding!=true)
+        if (!isFlee && !pathFinding)
         {
             pathFollowCompo1.enabled = true;
             pathFollowCompo2.enabled = true;
@@ -64,49 +64,55 @@ public class HumanBehaviourControl : MonoBehaviour
             flee.enabled = false;
             AISetter.target = player.transform;
             isFollowPlayer = true;
-            pathFollowCompo1.speed = player.GetComponent<PlayerMovement>().speed*0.5f;
             gameManager.GetComponent<GameManagerScript>().AddHumanToList(gameObject);
 
 
         }
-        // if not in player range, turn off following/flee, start wandering
         else if (!shouldFollowPlayer)
         {
-            flee.enabled = false;
-            isFollowPlayer = false;
-            wander.enabled = true;
-            pathFollowCompo1.speed = wanderSpeed;
-            AISetter.target = wanderTarget.transform;
-            gameManager.GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
-            
-        }
-        
-        // check whether has zombie in range
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, dangerRadius);
+            bool hasZombie = checkSurroundings();
 
+            if(isFlee)
+            {
+                if(!hasZombie)
+                {
+                    print("Stop running");
+                    stopFlee();
+                }
+            }
+            else
+            {
+                flee.enabled = false;
+                isFollowPlayer = false;
+                wander.enabled = true;
+                AISetter.target = wanderTarget.transform;
+                gameManager.GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
+            }
+        }
+    }
+
+    private bool checkSurroundings()
+    {
         bool hasZombie = false;
-            
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, dangerRadius);    
         /*
-         * For each collider that is in the given radius, check their tags
-         * If a collider has a tag 'Enemy, start to flee.
-         */
+        * For each collider that is in the given radius, check their tags
+        * If a collider has a tag 'Enemy, start to flee.
+        */
         foreach (Collider2D collider in colliders)
         { 
             if (collider.gameObject.tag == "Enemy")
             {
-                GetComponent<Flee>().setEnemy(collider.gameObject);
                 hasZombie = true;
-                startFlee();
+                if(!isFlee)
+                {
+                    flee.setEnemy(collider.gameObject);
+                    startFlee();
+                }
                 break;
             }
-            
         }
-
-        if(isFlee && !hasZombie)
-        {
-            stopFlee();
-        }
-
+        return hasZombie;
     }
 
     private bool isInPlayerRange()

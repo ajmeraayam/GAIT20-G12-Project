@@ -217,6 +217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  wanderTarget: {fileID: 0}
+  dangerRadius: 10
+  playerRadius: 10
+  wanderSpeed: 3
 --- !u!114 &998918590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,4 +245,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88788a1fd0fadce4aaf6278871f004bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
   currentVel: {x: 0, y: 0}
