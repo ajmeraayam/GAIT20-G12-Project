@@ -10,7 +10,7 @@ public class Flee : MonoBehaviour {
     public float speed = 2.0f;
     private float angle, interval;
 
-    Vector2 currentVel;
+    public Vector2 currentVel;
 
 
     // Start is called before the first frame update
