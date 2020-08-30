@@ -20,6 +20,7 @@ public class HumanBehaviourControl : MonoBehaviour
     private bool isFlee;
     public float dangerRadius = 3f;
     public float playerRadius = 10f;
+    public float wanderSpeed = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -38,21 +39,10 @@ public class HumanBehaviourControl : MonoBehaviour
         wander.enabled = true;
         AISetter.target = wanderTarget.transform;
 
-
-        //pathFollowCompo1.enabled = false;
-        //pathFollowCompo2.enabled = false;
-        //pathFollowCompo3.enabled = false;
         pathFinding = true;
         isFollowPlayer = false;
         flee.enabled = false;
-        /*
-        wander.enabled = true;
-        pathFollowCompo1.enabled = false;
-        pathFollowCompo2.enabled = false;
-        pathFollowCompo3.enabled = false;
-        isFollowPlayer = false;
-        flee.enabled = false;
-        */
+
     }
 
     // Update is called once per frame
@@ -73,6 +63,7 @@ public class HumanBehaviourControl : MonoBehaviour
             flee.enabled = false;
             AISetter.target = player.transform;
             isFollowPlayer = true;
+            pathFollowCompo1.speed = player.GetComponent<PlayerMovement>().speed;
             gameManager.GetComponent<GameManagerScript>().AddHumanToList(gameObject);
 
 
@@ -82,6 +73,7 @@ public class HumanBehaviourControl : MonoBehaviour
             flee.enabled = false;
             isFollowPlayer = false;
             wander.enabled = true;
+            pathFollowCompo1.speed = wanderSpeed;
             AISetter.target = wanderTarget.transform;
             gameManager.GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
             
