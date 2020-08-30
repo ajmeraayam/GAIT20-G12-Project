@@ -7,13 +7,17 @@ public class HumanBehaviourControl : MonoBehaviour
 {
     // behaviour script and player object
     public GameObject player;
-    private bool isFollowPlayer;
+    private bool pathFinding;
     AILerp pathFollowCompo1;
     AIDestinationSetter pathFollowCompo2;
     Seeker pathFollowCompo3;
+    AIDestinationSetter AISetter;
     Flee flee;
     Wander wander;
     private GameObject gameManager;
+    GameObject wanderTarget;
+    private bool isFollowPlayer;
+    private bool isFlee;
 
 
     // Start is called before the first frame update
@@ -21,18 +25,22 @@ public class HumanBehaviourControl : MonoBehaviour
     {
         // open wandering
         gameManager = GameObject.Find("GameManager");
-        
+        wanderTarget = GameObject.Find("WanderTarget");
         pathFollowCompo1 = this.gameObject.GetComponent<AILerp>();
         pathFollowCompo2 = this.gameObject.GetComponent<AIDestinationSetter>();
         pathFollowCompo3 = this.gameObject.GetComponent<Seeker>();
         flee = this.gameObject.GetComponent<Flee>();
         wander = this.gameObject.GetComponent<Wander>();
 
-
+        AISetter = this.gameObject.GetComponent<AIDestinationSetter>();
         wander.enabled = true;
-        pathFollowCompo1.enabled = false;
-        pathFollowCompo2.enabled = false;
-        pathFollowCompo3.enabled = false;
+        AISetter.target = wanderTarget.transform;
+
+
+        //pathFollowCompo1.enabled = false;
+        //pathFollowCompo2.enabled = false;
+        //pathFollowCompo3.enabled = false;
+        pathFinding = true;
         isFollowPlayer = false;
         flee.enabled = false;
         /*
@@ -49,28 +57,35 @@ public class HumanBehaviourControl : MonoBehaviour
     void Update()
     {
         bool shouldFollowPlayer = isInPlayerRange();
-
-        // if in player range, turn off wandering/flee, turn on following
-        if (shouldFollowPlayer && isFollowPlayer == false)
+        if (!isFlee && pathFinding!=true)
         {
-            wander.enabled = false;
-            flee.enabled = false;
             pathFollowCompo1.enabled = true;
             pathFollowCompo2.enabled = true;
             pathFollowCompo3.enabled = true;
+        }
+
+        // if in player range, turn off wandering/flee, turn on following
+        if (shouldFollowPlayer)
+        {
+            wander.enabled = false;
+            flee.enabled = false;
+            
+            AISetter.target = player.transform;
+
             isFollowPlayer = true;
             gameManager.GetComponent<GameManagerScript>().AddHumanToList(gameObject);
 
 
         }
-        else if (!shouldFollowPlayer && isFollowPlayer == true)
+        else if (!shouldFollowPlayer)
         {
             flee.enabled = false;
-            pathFollowCompo1.enabled = false;
-            pathFollowCompo2.enabled = false;
-            pathFollowCompo3.enabled = false;
+            //pathFollowCompo1.enabled = false;
+            //pathFollowCompo2.enabled = false;
+            //pathFollowCompo3.enabled = false;
             isFollowPlayer = false;
             wander.enabled = true;
+            AISetter.target = wanderTarget.transform;
             gameManager.GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
             
         }
@@ -92,7 +107,11 @@ public class HumanBehaviourControl : MonoBehaviour
         if (!isFollowPlayer)
         {
             wander.enabled = false;
+            pathFollowCompo1.enabled = false;
+            pathFollowCompo2.enabled = false;
+            pathFollowCompo3.enabled = false;
             flee.enabled = true;
+            pathFinding = false;
         }
     }
 }

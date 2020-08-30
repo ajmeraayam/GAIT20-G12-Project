@@ -1,17 +1,43 @@
-﻿
+﻿using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Wander : MonoBehaviour
 {
+    AIDestinationSetter AISetter;
+    GameObject wanderTarget;
+    private int time;
+    int Range = 10;
 
+    private void Start()
+    {
+        AISetter = this.gameObject.GetComponent<AIDestinationSetter>();
+        wanderTarget = GameObject.Find("WanderTarget");
+    }
+
+    private void Update()
+    {
+        if (time > 60)
+        {
+            wanderTarget.transform.position = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - Range, transform.position.y + Range), 0);
+            time = 0;
+        }
+        else
+        {
+            time++;
+        }
+        Debug.Log("Time:" + time);
+        
+    }
+
+    /*
 
     float Speed = 3;
 
     Vector3 wayPoint;
 
-    int Range = 10;
+    int Range = 3;
 
     void Start()
     {
@@ -28,7 +54,8 @@ public class Wander : MonoBehaviour
         Vector3 pos = transform.position + transform.TransformDirection(Vector3.up) * Speed * Time.deltaTime;
         pos.z = 0;
         transform.position = pos;
-        
+        Quaternion rotation = new Quaternion(0, 0, 0, 0);
+        transform.rotation = rotation;
 
         Debug.Log("position: " + transform.position);
         Debug.Log("rotation: " + transform.rotation);
@@ -61,9 +88,13 @@ public class Wander : MonoBehaviour
         transform.position = pos;
         Debug.Log("position: " + transform.position);
         Debug.Log("rotation: " + transform.rotation);
+        Quaternion rotation = new Quaternion(0, 0, 0, 0);
+        transform.rotation = rotation;
         //Debug.Log("LockAt: " + transform.position);
         //Debug.Log(wayPoint + " and " + (transform.position - wayPoint).magnitude);
     }
+
+    */
 }
 
 
