@@ -1629,7 +1629,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b289d58ae8dc2ec4cb758ccac9f746a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 5531031814265500680, guid: 426cf60e2c3a2e3429fb8a672ab0698d,
+    type: 3}
   behaviour: {fileID: 11400000, guid: f2a5bb6aef81ee144bd35d875c46f2e1, type: 2}
+  startCount: 50
   driveFactor: 10
   neighbourRadius: 2
   avoidanceRadiusMultiplier: 0.5
@@ -2172,7 +2175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b289d58ae8dc2ec4cb758ccac9f746a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentPrefab: {fileID: -3590805509714134525, guid: f6acd5c4d40d55a4a99a47dc5648ffd8,
+    type: 3}
   behaviour: {fileID: 11400000, guid: f2a5bb6aef81ee144bd35d875c46f2e1, type: 2}
+  startCount: 50
   driveFactor: 10
   neighbourRadius: 2
   avoidanceRadiusMultiplier: 0.5
