@@ -8,6 +8,7 @@ using UnityEngine;
  */
 public class ZombieCollision : MonoBehaviour
 {
+
     void OnCollisionEnter2D(Collision2D other)
     {
         // If zombie collides with player, it reduces the players health
@@ -26,6 +27,7 @@ public class ZombieCollision : MonoBehaviour
             // Add the functionality for checking the list of humans that are following the Player and removing the human if it is in the list. Compare gameobjects
             GameManagerScript.Instance.RemoveHumanFromList(other.gameObject);
             // Remove the human gameobject and replace it with zombie gameobject
+            GameObject.Find("GameManager").GetComponent<GameManagerScript>().RemoveHumanFromList(gameObject);
             Destroy(other.gameObject);
             // The human (converted to zombie) is added to a flock. 
             // This is determined by the zombie that killed the human and what flock it belonged to.

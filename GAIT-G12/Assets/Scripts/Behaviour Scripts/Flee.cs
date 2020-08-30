@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flee : MonoBehaviour {
     private Rigidbody2D rigidBody;
     private GameObject enemy;
+    
     private Vector2 movement, desiredVel, steering, enemyVel;
     private float speed = 2.0f;
     private float angle, interval;
@@ -15,7 +16,7 @@ public class Flee : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         rigidBody = this.GetComponent<Rigidbody2D>();
-        enemy = GameObject.FindWithTag("Enemy");
+        //enemy = GameObject.FindWithTag("Enemy");
         currentVel = new Vector2(0.0f, 0.0f);
         //enemyVel = enemy.GetComponent<Persue>().currentVel;
 
@@ -23,6 +24,7 @@ public class Flee : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        Debug.Log("I am running");
         //Update the enemy's velocity
         enemyVel = enemy.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         //enemyVel = enemy.GetComponent<Persue>().currentVel;
@@ -49,5 +51,10 @@ public class Flee : MonoBehaviour {
 
         
         print("Current Vel " + currentVel);
+    }
+
+    public void setEnemy(GameObject zombie)
+    {
+        enemy = zombie;
     }
 }
