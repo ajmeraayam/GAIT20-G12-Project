@@ -14,6 +14,8 @@ public class GameManagerScript : MonoBehaviour
     private bool gameOver = false;
     // List to store gameobjects of humans that are saved
     private HashSet<GameObject> humansSaved;
+    public AudioClip[] music; // background music, losemusic
+    
 
     // Returning the only instance for this class
     public static GameManagerScript Instance {
@@ -39,6 +41,10 @@ public class GameManagerScript : MonoBehaviour
      */
     public void GameOver() {
         Time.timeScale = 0;
+
+        // end music not work
+        gameObject.GetComponent<AudioSource>().clip = music[1];
+        gameObject.GetComponent<AudioSource>().Play(); //not stop when restart game
 
         calcFinalScore(false);
         Instantiate(gameOverUI);
