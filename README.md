@@ -1,5 +1,5 @@
 # GAIT20-G12-Project
-Repository for Games and Artificial Intelligence Techniques semester project
+Repository for Games and Artificial Intelligence Techniques semester project;
 control: awsd for moving,
          space for attacking;
 
