@@ -654,7 +654,8 @@ namespace Pathfinding
 			if (updatePosition) simulatedPosition = tr.position;
 			if (updateRotation) simulatedRotation = tr.rotation;
 
-			
+			Rigidbody2D rigidbody = gameObject.GetComponent<Rigidbody2D>();
+
 			Vector3 direction;
 			Debug.Log("current Position: " + transform.position.ToString());
 			nextPosition = CalculateNextPosition(out direction, isStopped ? 0f : deltaTime);
@@ -662,7 +663,8 @@ namespace Pathfinding
 			var desiredVelocity = nextPosition - transform.position;
 			Debug.Log("desired velocity: " + desiredVelocity.ToString());
 			desiredVelocity = desiredVelocity.normalized * maxVelocity;
-			Vector3 currentVelocity = transform.position * deltaTime * speed;
+			//Vector3 currentVelocity = transform.position * deltaTime * speed;
+			Vector3 currentVelocity = rigidbody.velocity * deltaTime * speed;
 			Debug.Log("current velocity: " + currentVelocity.ToString());
 			var steering = desiredVelocity - currentVelocity;
 			steering = Vector3.ClampMagnitude(steering, maxForce);
@@ -672,8 +674,10 @@ namespace Pathfinding
 			currentVelocity = Vector3.ClampMagnitude(currentVelocity + steering, maxVelocity);
 			transform.position += currentVelocity * Time.deltaTime;
 			Debug.Log("new position: " + transform.position.ToString());
-			transform.forward = currentVelocity.normalized;
-			
+			//transform.forward = currentVelocity.normalized;
+			//transform.up = currentVelocity.normalized;
+
+
 			/*
 			Vector3 direction;
 			Debug.Log("current Position: " + transform.position.ToString());

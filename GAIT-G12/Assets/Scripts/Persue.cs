@@ -29,6 +29,7 @@ public class Persue : MonoBehaviour
     }
 
     private void persue(GameObject target) {
+        target.GetComponent<HumanBehaviourControl>().startFlee();
         //Update the targets velocity
         //targetVel = target.GetComponent<MouseMove>().currentVel; // Used with the Mouse Move
         targetVel = target.GetComponent<Flee>().currentVel;
@@ -50,6 +51,6 @@ public class Persue : MonoBehaviour
 
         rigidBody.MovePosition((Vector2)gameObject.transform.position + (currentVel * speed * Time.deltaTime));
 
-        target.GetComponent<HumanBehaviourControl>().startFlee();
+        
     }
 }

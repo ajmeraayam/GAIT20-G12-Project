@@ -6,21 +6,21 @@ using UnityEngine;
 public class Wander : MonoBehaviour
 {
     AIDestinationSetter AISetter;
-    GameObject wanderTarget;
+    //GameObject wanderTarget;
     private int time;
     int Range = 10;
 
     private void Start()
     {
         AISetter = this.gameObject.GetComponent<AIDestinationSetter>();
-        wanderTarget = GameObject.Find("WanderTarget");
+        //wanderTarget = GameObject.Find("WanderTarget");
     }
 
     private void Update()
     {
         if (time > 60)
         {
-            wanderTarget.transform.position = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - Range, transform.position.y + Range), 0);
+            gameObject.GetComponent<HumanBehaviourControl>().wanderTarget.transform.position = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - Range, transform.position.y + Range), 0);
             time = 0;
         }
         else

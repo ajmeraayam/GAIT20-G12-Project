@@ -15,7 +15,7 @@ public class HumanBehaviourControl : MonoBehaviour
     Flee flee;
     Wander wander;
     private GameObject gameManager;
-    GameObject wanderTarget;
+    public GameObject wanderTarget;
     private bool isFollowPlayer;
     private bool isFlee;
 
@@ -25,7 +25,8 @@ public class HumanBehaviourControl : MonoBehaviour
     {
         // open wandering
         gameManager = GameObject.Find("GameManager");
-        wanderTarget = GameObject.Find("WanderTarget");
+        int num = Random.Range(1, 6);
+        wanderTarget = GameObject.Find("WanderTarget" +num.ToString());
         pathFollowCompo1 = this.gameObject.GetComponent<AILerp>();
         pathFollowCompo2 = this.gameObject.GetComponent<AIDestinationSetter>();
         pathFollowCompo3 = this.gameObject.GetComponent<Seeker>();
@@ -69,9 +70,7 @@ public class HumanBehaviourControl : MonoBehaviour
         {
             wander.enabled = false;
             flee.enabled = false;
-            
             AISetter.target = player.transform;
-
             isFollowPlayer = true;
             gameManager.GetComponent<GameManagerScript>().AddHumanToList(gameObject);
 
@@ -113,5 +112,15 @@ public class HumanBehaviourControl : MonoBehaviour
             flee.enabled = true;
             pathFinding = false;
         }
+    }
+
+    public void stopFlee()
+    {
+        flee.enabled = false;
+        wander.enabled = true;
+        pathFollowCompo1.enabled = true;
+        pathFollowCompo2.enabled = true;
+        pathFollowCompo3.enabled = true;
+        pathFinding = true;
     }
 }
