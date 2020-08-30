@@ -15,7 +15,7 @@ public class GameManagerScript : MonoBehaviour
     // List to store gameobjects of humans that are saved
     private HashSet<GameObject> humansSaved;
     public AudioClip[] music; // background music, losemusic
-    
+    public GameObject mainCamera;
 
     // Returning the only instance for this class
     public static GameManagerScript Instance {
@@ -31,6 +31,7 @@ public class GameManagerScript : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        //mainCamera = GameObject.Find("Main Camera");
         instance = GetComponent<GameManagerScript>();
         humansSaved = new HashSet<GameObject>();
     }
@@ -43,8 +44,8 @@ public class GameManagerScript : MonoBehaviour
         Time.timeScale = 0;
 
         // end music not work
-        gameObject.GetComponent<AudioSource>().clip = music[1];
-        gameObject.GetComponent<AudioSource>().Play(); //not stop when restart game
+        mainCamera.GetComponent<AudioSource>().clip = music[1];
+        mainCamera.GetComponent<AudioSource>().Play(); //not stop when restart game
 
         calcFinalScore(false);
         Instantiate(gameOverUI);
