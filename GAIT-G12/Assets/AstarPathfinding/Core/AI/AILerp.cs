@@ -623,8 +623,7 @@ namespace Pathfinding {
 			float distance = desiredVelocity.magnitude;
 			desiredVelocity = desiredVelocity.normalized * maxVelocity;
 			Debug.Log("desired velocity: " + desiredVelocity.ToString());
-			//Vector3 currentVelocity = (transform.position * deltaTime * speed-transform.position).normalized* maxVelocity;
-			Vector3 currentVelocity = transform.position * deltaTime * speed; // bug may from here
+			Vector3 currentVelocity = transform.position *deltaTime * speed;
 			Debug.Log("current velocity: " + currentVelocity.ToString());
 			Vector3 steering = desiredVelocity - currentVelocity;
 			Debug.Log("steering velocity: " + steering.ToString());
