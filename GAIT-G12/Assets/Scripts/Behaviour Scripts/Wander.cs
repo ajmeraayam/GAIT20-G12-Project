@@ -16,7 +16,7 @@ public class Wander : MonoBehaviour
 
     private void Update()
     {
-        if (time > 5)
+        if (time > 3)
         {
             gameObject.GetComponent<HumanBehaviourControl>().wanderTarget.transform.position = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - Range, transform.position.y + Range), 0);
             time = 0;
